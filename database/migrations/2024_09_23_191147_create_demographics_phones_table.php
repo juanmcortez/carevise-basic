@@ -7,17 +7,13 @@ use Illuminate\Database\Migrations\Migration;
 return new class extends Migration {
     public function up(): void
     {
-        Schema::create('demographic_addresses', function (Blueprint $table) {
+        Schema::create('demographics_phones', function (Blueprint $table) {
             $table->id();
 
-            $table->string('street')->nullable();
-            $table->string('street_extended')->nullable();
-
-            $table->string('city')->nullable();
-            $table->string('state')->nullable();
-            $table->string('postal_code')->nullable();
-
             $table->string('country_code')->nullable();
+            $table->string('area_code')->nullable();
+            $table->string('prefix_number')->nullable();
+            $table->string('line_number')->nullable();
 
             $table->timestamps();
             $table->softDeletes();
@@ -26,6 +22,6 @@ return new class extends Migration {
 
     public function down(): void
     {
-        Schema::dropIfExists('demographic_addresses');
+        Schema::dropIfExists('demographics_phones');
     }
 };

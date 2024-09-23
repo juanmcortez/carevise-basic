@@ -15,7 +15,7 @@ class EmailAddress extends Model
      *
      * @var string
      */
-    protected $table = 'demographic_email_addresses';
+    protected $table = 'demographics_emails_addresses';
 
     /**
      * The attributes that are mass assignable.
@@ -33,7 +33,11 @@ class EmailAddress extends Model
      * @var array<int, string>
      */
     protected $hidden = [
+        'id',
         'email_verified_at',
+        'created_at',
+        'updated_at',
+        'deleted_at',
     ];
 
     /**

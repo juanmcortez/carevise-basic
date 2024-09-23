@@ -15,7 +15,7 @@ class Phone extends Model
      *
      * @var string
      */
-    protected $table = 'demographic_phones';
+    protected $table = 'demographics_phones';
 
     /**
      * The attributes that are mass assignable.

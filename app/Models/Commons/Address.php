@@ -15,7 +15,7 @@ class Address extends Model
      *
      * @var string
      */
-    protected $table = 'demographic_addresses';
+    protected $table = 'demographics_addresses';
 
     /**
      * The attributes that are mass assignable.
@@ -29,5 +29,17 @@ class Address extends Model
         'state',
         'postal_code',
         'country_code',
+    ];
+
+    /**
+     * The attributes that should be hidden for serialization.
+     *
+     * @var array<int, string>
+     */
+    protected $hidden = [
+        'id',
+        'created_at',
+        'updated_at',
+        'deleted_at',
     ];
 }
