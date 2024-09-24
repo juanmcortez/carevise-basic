@@ -4,6 +4,7 @@ namespace App\Models\Commons;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Address extends Model
@@ -42,4 +43,28 @@ class Address extends Model
         'updated_at',
         'deleted_at',
     ];
+
+    /**
+     * The accessors to append to the model's array form.
+     *
+     * @var array
+     */
+    protected $appends = [
+        'formatted',
+    ];
+
+    /**
+     * Return the model complete name.
+     */
+    protected function formatted(): Attribute
+    {
+        if(!empty($this->street) && !empty($this->city) && !empty($this->state) && !empty($this->postal_code)) {
+            return new Attribute(
+                get: fn() => $this->street .
+                    ((!empty($this->street_extended)) ? ' ' . $this->street_extended : null) . '<br />' .
+                    $this->city . ', ' . $this->state . ' ' . $this->postal_code,
+            );
+        }
+        return new Attribute(get: fn () => null);
+    }
 }

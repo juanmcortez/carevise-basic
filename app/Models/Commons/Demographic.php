@@ -2,8 +2,10 @@
 
 namespace App\Models\Commons;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -53,8 +55,44 @@ class Demographic extends Model
     protected function casts(): array
     {
         return [
-            'birthdate' => 'datetime',
+            'birthdate' => 'datetime:M d, Y',
         ];
+    }
+
+    /**
+     * The accessors to append to the model's array form.
+     *
+     * @var array
+     */
+    protected $appends = [
+        'complete_name',
+        'age',
+    ];
+
+    /**
+     * Return the model complete name.
+     */
+    protected function completeName(): Attribute
+    {
+        if(!empty($this->last_name) && !empty($this->first_name)) {
+            return new Attribute(
+                get: fn() => $this->last_name . ', ' . $this->first_name . ((!empty($this->middle_name)) ? ' ' . $this->middle_name : null),
+            );
+        }
+        return new Attribute(get: fn () => null);
+    }
+
+    /**
+     * Return the model age.
+     */
+    protected function age(): Attribute
+    {
+        if(!empty($this->birthdate)) {
+            return new Attribute(
+                get: fn() => Carbon::parse($this->birthdate)->age,
+            );
+        }
+        return new Attribute(get: fn () => null);
     }
 
     /**
@@ -62,7 +100,7 @@ class Demographic extends Model
      *
      * @return HasOne
      */
-    public function emailAddress(): HasOne
+    public function email_address(): HasOne
     {
         return $this->hasOne(EmailAddress::class, 'id', 'email_address_id')
             ->withDefault();

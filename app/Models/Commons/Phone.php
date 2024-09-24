@@ -4,6 +4,7 @@ namespace App\Models\Commons;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Phone extends Model
@@ -40,4 +41,26 @@ class Phone extends Model
         'updated_at',
         'deleted_at',
     ];
+
+    /**
+     * The accessors to append to the model's array form.
+     *
+     * @var array
+     */
+    protected $appends = [
+        'formatted',
+    ];
+
+    /**
+     * Return the model complete name.
+     */
+    protected function formatted(): Attribute
+    {
+        if(!empty($this->country_code) && !empty($this->area_code) && !empty($this->prefix_number) && !empty($this->line_number)) {
+            return new Attribute(
+                get: fn() => $this->country_code . ' (' . $this->area_code  . ') ' . $this->prefix_number . '-' . $this->line_number,
+            );
+        }
+        return new Attribute(get: fn () => null);
+    }
 }
