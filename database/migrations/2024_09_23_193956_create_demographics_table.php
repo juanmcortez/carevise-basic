@@ -38,11 +38,21 @@ return new class extends Migration {
                 ->constrained('demographics_phones')
                 ->cascadeOnUpdate()
                 ->cascadeOnDelete();
+
+            $table->softDeletes();
+            $table->timestamps();
         });
     }
 
     public function down(): void
     {
+        Schema::table('demographics', static function (Blueprint $table) {
+            $table->dropConstrainedForeignId('cellphone_id');
+            $table->dropConstrainedForeignId('phone_id');
+            $table->dropConstrainedForeignId('address_id');
+            $table->dropConstrainedForeignId('email_address_id');
+        });
+
         Schema::dropIfExists('demographics');
     }
 };

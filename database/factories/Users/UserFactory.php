@@ -4,6 +4,7 @@ namespace Database\Factories\Users;
 
 use App\Models\Users\User;
 use Illuminate\Support\Str;
+use App\Models\Commons\Demographic;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -25,9 +26,10 @@ class UserFactory extends Factory
     public function definition(): array
     {
         return [
-            'username' => fake()->name(),
-            'password' => static::$password ??= Hash::make('password'),
-            'remember_token' => Str::random(10),
+            'username'          => fake()->userName(),
+            'password'          => static::$password ??= Hash::make('password'),
+            'demographic_id'    => Demographic::factory(),
+            'remember_token'    => Str::random(10),
         ];
     }
 }
