@@ -15,17 +15,16 @@ class DemographicFactory extends Factory
     public function definition(): array
     {
         return [
-            'title' => $this->faker->word(),
-            'first_name' => $this->faker->firstName(),
-            'middle_name' => $this->faker->name(),
-            'last_name' => $this->faker->lastName(),
-            'birthdate' => $this->faker->word(),
-            'gender' => $this->faker->word(),
-
-            'email_address_id' => EmailAddress::factory(),
-            'address_id' => Address::factory(),
-            'phone_id' => Phone::factory(),
-            'cellphone_id' => Phone::factory(),
+            'title'             => 'mr',
+            'first_name'        => $this->faker->firstName(),
+            'middle_name'       => $this->faker->firstName(),
+            'last_name'         => $this->faker->lastName(),
+            'birthdate'         => $this->faker->dateTimeBetween('-90 years', '-1 month'),
+            'gender'            => 'male',
+            'email_address_id'  => EmailAddress::factory(),
+            'address_id'        => Address::factory(),
+            'phone_id'          => Phone::factory(),
+            'cellphone_id'      => Phone::factory(),
         ];
     }
 }

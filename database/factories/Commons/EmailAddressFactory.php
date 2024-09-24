@@ -13,7 +13,7 @@ class EmailAddressFactory extends Factory
     public function definition(): array
     {
         return [
-            'email' => $this->faker->unique()->safeEmail(),
+            'email'             => $this->faker->unique()->freeEmail(),
             'email_verified_at' => Carbon::now(),
         ];
     }

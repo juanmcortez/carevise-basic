@@ -12,12 +12,12 @@ class AddressFactory extends Factory
     public function definition(): array
     {
         return [
-            'street' => $this->faker->streetName(),
-            'street_extended' => $this->faker->streetName(),
-            'city' => $this->faker->city(),
-            'state' => $this->faker->word(),
-            'postal_code' => $this->faker->postcode(),
-            'country_code' => $this->faker->word(),
+            'street'            => $this->faker->streetName(),
+            'street_extended'   => null,
+            'city'              => $this->faker->city(),
+            'state'             => 'NJ',
+            'postal_code'       => $this->faker->postcode(),
+            'country_code'      => 'US',
         ];
     }
 }

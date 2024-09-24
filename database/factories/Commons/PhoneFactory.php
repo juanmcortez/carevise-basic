@@ -12,10 +12,10 @@ class PhoneFactory extends Factory
     public function definition(): array
     {
         return [
-            'country_code' => $this->faker->word(),
-            'area_code' => $this->faker->word(),
-            'prefix_number' => $this->faker->word(),
-            'line_number' => $this->faker->word(),
+            'country_code'  => '+1',
+            'area_code'     => $this->faker->randomNumber(3, true),
+            'prefix_number' => $this->faker->randomNumber(3, true),
+            'line_number'   => $this->faker->randomNumber(4, true),
         ];
     }
 }
