@@ -16,12 +16,14 @@ Route::controller(UserController::class)
         // Logged-in user routes
 
         // System user routes
-        Route::get('/user/{user}/profile/edit', 'edit')
+        Route::get('/users/list', 'show')
+            ->name('list');
+        Route::get('/users/{user}/profile/edit', 'edit')
             ->name('profile.edit');
         // System user routes
 
         // Common user routes
-        Route::patch('/user/update', 'update')
+        Route::patch('/users/update', 'update')
             ->name('update');
         // Common user routes
 });

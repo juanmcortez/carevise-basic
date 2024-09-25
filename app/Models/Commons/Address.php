@@ -61,10 +61,10 @@ class Address extends Model
         if(!empty($this->street) && !empty($this->city) && !empty($this->state) && !empty($this->postal_code)) {
             return new Attribute(
                 get: fn() => $this->street .
-                    ((!empty($this->street_extended)) ? ' ' . $this->street_extended : null) . '<br />' .
-                    $this->city . ', ' . $this->state . ' ' . $this->postal_code,
+                    ((!empty($this->street_extended)) ? ' | ' . $this->street_extended : null) . '<br />' .
+                    $this->city . '<br />' . $this->state . ', ' . $this->postal_code,
             );
         }
-        return new Attribute(get: fn () => null);
+        return new Attribute(get: fn () => '&nbsp;<br />&nbsp;<br />&nbsp;');
     }
 }
