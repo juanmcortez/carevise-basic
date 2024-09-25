@@ -19,7 +19,7 @@
             </tr>
         @else
             @foreach ($users as $user)
-                <tr x-data x-on:click="window.location.href='{{ route('dashboard') }}'">
+                <tr x-data x-on:click="window.location.href='{{ route('user.profile.edit', ['user' => $user->username]) }}'">
                     <td class="!text-left">{{ $user->demographic->complete_name }}</td>
                     <td>{{ $user->username }}</td>
                     <td>{{ $user->demographic->birthdate->format('M d, Y') }}</td>
