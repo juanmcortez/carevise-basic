@@ -25,6 +25,7 @@ class Demographic extends Model
         'last_name',
         'birthdate',
         'gender',
+        'about_me',
         'email_address_id',
         'address_id',
         'phone_id',

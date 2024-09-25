@@ -19,6 +19,8 @@ return new class extends Migration {
             $table->string('birthdate');
             $table->string('gender');
 
+            $table->longText('about_me')->nullable();
+
             $table->foreignId('email_address_id')
                 ->constrained('demographics_emails_addresses')
                 ->cascadeOnUpdate()

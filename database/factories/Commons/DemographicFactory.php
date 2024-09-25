@@ -21,6 +21,7 @@ class DemographicFactory extends Factory
             'last_name'         => $this->faker->lastName(),
             'birthdate'         => $this->faker->dateTimeBetween('-90 years', '-1 month'),
             'gender'            => 'male',
+            'about_me'          => $this->faker->paragraph(5, true),
             'email_address_id'  => EmailAddress::factory(),
             'address_id'        => Address::factory(),
             'phone_id'          => Phone::factory(),
