@@ -39,9 +39,17 @@ return [
 
         'public' => [
             'driver' => 'local',
-            'root' => storage_path('app/public'),
-            'url' => env('APP_URL').'/storage',
+            'root' => storage_path('carevise/public'),
+            'url' => env('APP_URL').'/open',
             'visibility' => 'public',
+            'throw' => false,
+        ],
+
+        'private' => [
+            'driver' => 'local',
+            'root' => storage_path('carevise/private'),
+            'url' => env('APP_URL').'/closed',
+            'visibility' => 'private',
             'throw' => false,
         ],
 
@@ -71,7 +79,8 @@ return [
     */
 
     'links' => [
-        public_path('storage') => storage_path('app/public'),
+        public_path('open') => storage_path('carevise/public'),
+        public_path('closed') => storage_path('carevise/private'),
     ],
 
 ];
