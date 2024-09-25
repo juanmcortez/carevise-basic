@@ -979,6 +979,18 @@
         @apply space-x-6;
     }
 
+    .user-profile .card-holder.double.phones {
+        @apply space-x-2;
+    }
+
+    .user-profile .card-holder.double.phones .form-block.split {
+        @apply mr-3;
+    }
+
+    .user-profile .card-holder.double.phones .form-block.split + .form-block {
+        @apply ml-3;
+    }
+
     .user-profile .delete-user .card-holder.double,
     .provider-profile .delete-user .card-holder.double {
         @apply first-of-type:pb-6;
