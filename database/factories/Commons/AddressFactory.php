@@ -15,9 +15,9 @@ class AddressFactory extends Factory
             'street'            => $this->faker->streetName(),
             'street_extended'   => null,
             'city'              => $this->faker->city(),
-            'state'             => 'NJ',
+            'state'             => 'New Jersey',
             'postal_code'       => $this->faker->postcode(),
-            'country_code'      => 'US',
+            'country_code'      => 'us',
         ];
     }
 }
