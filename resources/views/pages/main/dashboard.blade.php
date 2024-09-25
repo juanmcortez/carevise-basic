@@ -7,6 +7,11 @@
     {{-- The content that is placed here, will display as the page content --}}
     @php
         $users = \App\Models\Users\User::with('demographic', 'demographic.email_address', 'demographic.address', 'demographic.phone', 'demographic.cellphone')
+            ->join('demographics', 'demographics.id', '=', 'users.demographic_id')
+            ->orderBy('demographics.last_name')
+            ->orderBy('demographics.first_name')
+            ->orderBy('demographics.middle_name')
+            ->select('users.*')
             ->paginate(10);
     @endphp
     <x-tables.simple class="user-list my-6"
