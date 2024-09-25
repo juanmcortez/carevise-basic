@@ -83,12 +83,22 @@ class UserController extends Controller
             $user->demographic->phone->update($phone_data) &&
             $user->demographic->cellphone->update($cellphone_data)
         ) {
-            $status = 'success';
-            $message = __('<strong>:username</strong>\'s profile information has been updated successfully!',
-                [
-                    'username' => $user->demographic->complete_name ?? ($user->username ?? $request->validated('username'))
-                ]
-            );
+            // If the user is being de-activated
+            if(!$request->validated('is_active')) {
+                $status = 'info';
+                $message = __('The user <strong>:username</strong>\'s has been de-activated.',
+                    [
+                        'username' => $user->demographic->complete_name ?? ($user->username ?? $request->validated('username'))
+                    ]
+                );
+            } else {
+                $status = 'success';
+                $message = __('<strong>:username</strong>\'s profile information has been updated successfully!',
+                    [
+                        'username' => $user->demographic->complete_name ?? ($user->username ?? $request->validated('username'))
+                    ]
+                );
+            }
         }
         // Response
         return Redirect::route('user.list')->with($status, $message);

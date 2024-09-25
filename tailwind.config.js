@@ -9,6 +9,7 @@ export default {
         "./vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php",
         "./app/Http/**/*.php",
         "./app/Models/**/*.php",
+        "./config/**/*.php",
         "./storage/framework/views/*.php",
         "./resources/**/*.blade.php",
         "./resources/**/*.css",

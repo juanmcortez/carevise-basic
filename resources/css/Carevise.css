@@ -437,7 +437,7 @@
     #table thead tr th,
     #table tbody tr td {
         @apply align-middle;
-        @apply text-xs leading-none text-center text-dark;
+        @apply text-xs leading-4 text-center text-dark;
         @apply p-4;
     }
 
