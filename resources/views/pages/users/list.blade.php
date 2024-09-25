@@ -8,7 +8,7 @@
     <x-slot:subMenu>users</x-slot>
 
     {{-- The content that is placed here, will display as the page content --}}
-    <x-tables.simple x-data class="user-list mt-6"
+    <x-tables.simple x-data class="user-list"
                      :columnsWidth="['w-2/12', 'w-1/12', 'w-1/12', 'w-2/12', 'w-2/12', 'w-2/12', 'w-2/12']"
                      :columnsLabel="['Name', 'Birthdate', 'Gender', 'E-mail', 'Address', 'Phone', 'Cellphone']"
                      :pagination="$users->links()">

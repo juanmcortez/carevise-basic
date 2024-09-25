@@ -58,13 +58,13 @@ class Address extends Model
      */
     protected function formatted(): Attribute
     {
-        if(!empty($this->street) && !empty($this->city) && !empty($this->state) && !empty($this->postal_code)) {
+        if (!empty($this->street) && !empty($this->city) && !empty($this->state) && !empty($this->postal_code)) {
             return new Attribute(
-                get: fn() => $this->street .
-                    ((!empty($this->street_extended)) ? ' | ' . $this->street_extended : null) . '<br />' .
-                    $this->city . '<br />' . $this->state . ', ' . $this->postal_code,
+                get: fn() => $this->street.
+                    ((!empty($this->street_extended)) ? '<br />'.$this->street_extended : null).'<br />'.
+                    $this->city.'<br />'.$this->state.', '.$this->postal_code,
             );
         }
-        return new Attribute(get: fn () => '&nbsp;<br />&nbsp;<br />&nbsp;');
+        return new Attribute(get: fn() => '&nbsp;<br />&nbsp;<br />&nbsp;');
     }
 }
