@@ -66,7 +66,7 @@ return [
     */
 
     'pagination' => [
-        'size' => 15,
+        'size' => 10,
     ],
 
     'formats' => [

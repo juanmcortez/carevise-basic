@@ -10,10 +10,10 @@ return new class extends Migration {
         Schema::create('demographics_phones', function (Blueprint $table) {
             $table->id();
 
-            $table->string('country_code')->nullable();
-            $table->string('area_code')->nullable();
-            $table->string('prefix_number')->nullable();
-            $table->string('line_number')->nullable();
+            $table->string('country_code', 7)->nullable();
+            $table->string('area_code', 4)->nullable();
+            $table->string('prefix_number', 5)->nullable();
+            $table->string('line_number', 5)->nullable();
 
             $table->timestamps();
             $table->softDeletes();

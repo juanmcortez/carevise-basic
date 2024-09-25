@@ -13,10 +13,11 @@
             <form method="POST" action="{{ route('user.update') }}">
                 @csrf
                 @method('PATCH')
+                <x-forms.input type="hidden" name="username" :value="$user->username" />
                 <div class="form-column">
                     <div class="card-holder double">
-                        <x-forms.input name="username" :label="__('Username')" :value="old('username', $user->username)"
-                                       disabled readonly required auto />
+                        <x-forms.input name="user_name" :label="__('Username')" :value="$user->username"
+                                       disabled readonly required />
                         <x-forms.input name="demographic[email_address][email]" :label="__('E-mail')"
                                        :value="old('demographic.email_address.email', $user->demographic->email_address->email)"
                                        focus required auto />
@@ -82,7 +83,7 @@
                         </div>
                         <div class="block">
                             <x-forms.select name="demographic[address][country_code]" :label="__('Country')"
-                                            :items="['AR' => 'Argentina', 'US' => 'United States of America']"
+                                            :items="['ar' => 'Argentina', 'us' => 'United States of America']"
                                             :value="old('demographic.address.country_code', $user->demographic->address->country_code)"
                                             auto />
                         </div>
@@ -102,16 +103,16 @@
                                        :value="old('demographic.phone.line_number', $user->demographic->phone->line_number)"
                                        class="split" maxlength="5" auto />
 
-                        <x-forms.input name="demographic[phone][country_code]" :label="__('Cellphone')" placeholder="+1"
+                        <x-forms.input name="demographic[cellphone][country_code]" :label="__('Cellphone')" placeholder="+1"
                                        :value="old('demographic.cellphone.country_code', $user->demographic->cellphone->country_code)"
                                        maxlength="7" auto />
-                        <x-forms.input name="demographic[phone][area_code]" :label="__(' ')" placeholder="999"
+                        <x-forms.input name="demographic[cellphone][area_code]" :label="__(' ')" placeholder="999"
                                        :value="old('demographic.cellphone.area_code', $user->demographic->cellphone->area_code)"
                                        maxlength="4" auto />
-                        <x-forms.input name="demographic[phone][prefix_number]" :label="__(' ')" placeholder="999"
+                        <x-forms.input name="demographic[cellphone][prefix_number]" :label="__(' ')" placeholder="999"
                                        :value="old('demographic.cellphone.prefix_number', $user->demographic->cellphone->prefix_number)"
                                        maxlength="5" auto />
-                        <x-forms.input name="demographic[phone][line_number]" :label="__(' ')" placeholder="9999"
+                        <x-forms.input name="demographic[cellphone][line_number]" :label="__(' ')" placeholder="9999"
                                        :value="old('demographic.cellphone.line_number', $user->demographic->cellphone->line_number)"
                                        maxlength="5" auto />
                     </div>
