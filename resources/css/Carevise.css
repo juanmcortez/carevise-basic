@@ -1,3 +1,991 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+    html,
+    body {
+        @apply flex;
+        @apply w-full min-h-screen;
+        @apply p-0 m-0;
+        @apply bg-light dark:bg-dark;
+    }
+
+    a {
+        @apply focus-visible:outline-none focus:outline-none focus-within:outline-none;
+        @apply focus-visible:ring-0 focus:ring-0 focus-within:ring-0;
+        @apply focus-visible:border-0 focus:border-0 focus-within:border-0;
+        @apply transition-all duration-200 ease-in-out;
+    }
+
+    h1 {
+        @apply text-3xl leading-[30px];
+    }
+
+    h2 {
+        @apply text-2xl leading-6;
+    }
+
+    h3 {
+        @apply text-xl leading-5;
+    }
+
+    h4 {
+        @apply text-lg leading-[18px];
+    }
+
+    h5 {
+        @apply text-base leading-4;
+    }
+
+    h6 {
+        @apply text-sm leading-[14px];
+    }
+
+    aside {
+        @apply flex flex-col;
+        @apply w-20 min-h-screen;
+        @apply border-r;
+        @apply bg-secondary border-accent/35;
+        @apply dark:bg-dark dark:border-primary/35;
+    }
+
+    aside .logo {
+        @apply w-8;
+        @apply p-0 pt-3.5 pb-4 m-0 mx-6 mb-2;
+        @apply border-b;
+        @apply border-accent/35;
+    }
+
+    aside .logo a {
+        @apply w-8 h-8;
+        @apply fill-accent;
+        @apply hover:fill-accent/50;
+    }
+
+    aside .nav {
+        @apply flex flex-col;
+        @apply flex-1 w-20;
+        @apply items-center justify-center;
+    }
+
+    aside .top {
+        @apply flex flex-col;
+        @apply w-20 h-full;
+    }
+
+    aside .bottom {
+        @apply flex flex-col;
+        @apply w-20 h-20;
+    }
+
+    aside .nav h6.menu {
+        @apply w-full;
+        @apply mb-1 first-of-type:mt-1.5;
+        @apply text-xs leading-4 text-center;
+        @apply text-dark/50;
+    }
+
+    aside .nav .item {
+        @apply flex;
+        @apply items-center justify-center;
+        @apply w-full h-auto;
+        @apply py-2.5 px-6 mb-1;
+        @apply text-accent;
+    }
+
+    aside .nav .item:hover {
+        @apply text-primary bg-accent/50;
+    }
+
+    aside .nav .item.active {
+        @apply border-r-4;
+        @apply border-accent bg-accent/15 hover:bg-accent/50;
+    }
+
+    aside .nav .item box-icon {
+        @apply w-5 h-5;
+        @apply fill-accent;
+    }
+
+    aside .nav .item:hover box-icon {
+        @apply fill-primary;
+    }
+
+    aside .nav .item + h6.menu,
+    main aside.submenu .nav form + h6.menu {
+        @apply mt-6;
+    }
+
+    main {
+        @apply flex flex-row;
+        @apply w-full min-h-screen;
+    }
+
+    main aside.submenu {
+        @apply min-h-screen w-72;
+        @apply p-0 m-0;
+        @apply bg-secondary/75 border-accent/35;
+        @apply dark:bg-dark/75 dark:border-primary/35;
+    }
+
+    main aside.submenu .nav {
+        @apply flex flex-col;
+        @apply flex-1 w-full;
+        @apply mt-14;
+        @apply items-start justify-start;
+    }
+
+    main aside.submenu .nav h6.menu {
+        @apply w-52;
+        @apply mx-6 mb-1 first-of-type:pt-[14px];
+        @apply text-xs leading-4;
+        @apply text-dark/50;
+        @apply first-of-type:border-t border-accent/35;
+    }
+
+    main aside.submenu .nav form {
+        @apply w-full
+    }
+
+    main aside.submenu .nav .item,
+    main aside.submenu .nav form .item {
+        @apply flex;
+        @apply items-center justify-start;
+        @apply w-full h-auto;
+        @apply py-2.5 px-6 mb-1;
+        @apply text-xs ;
+        @apply text-accent hover:text-primary hover:bg-accent/50;
+    }
+
+    main aside.submenu .nav .item box-icon,
+    main aside.submenu .nav form .item box-icon {
+        @apply mr-1;
+    }
+
+    main aside.submenu .nav .item.mini box-icon,
+    main aside.submenu .nav form .item.mini box-icon {
+        @apply w-4 h-4;
+    }
+
+    main aside.submenu .nav .item.active,
+    main aside.submenu .nav form .item.active {
+        @apply border-r-4;
+        @apply border-accent bg-accent/15 hover:bg-accent/50;
+    }
+
+    main aside.submenu .nav .item + h6.menu,
+    main aside.submenu .nav form .item + h6.menu {
+        @apply mt-6;
+    }
+
+    main .content {
+        @apply flex flex-col;
+        @apply p-0 m-0;
+        @apply w-full min-h-screen;
+        @apply text-sm;
+        @apply bg-primary text-dark;
+    }
+
+    main .content .header,
+    main .content .breadcrumb {
+        @apply px-6;
+    }
+
+    main .content .header {
+        @apply flex flex-row;
+        @apply w-full min-h-8;
+        @apply px-6 py-4 m-0;
+        @apply border-b;
+        @apply border-accent/35 bg-secondary/75;
+    }
+
+    main .content .header h1 {
+        @apply flex;
+        @apply items-center justify-start;
+        @apply w-1/2 h-auto;
+    }
+
+    main .content .header h1.centered {
+        @apply text-2xl leading-6;
+        @apply text-accent;
+        @apply justify-center;
+        @apply w-full;
+    }
+
+    main .content .header h1.centered a {
+        @apply w-7 h-7;
+        @apply mr-2;
+        @apply fill-accent/75;
+    }
+
+    main .content .header .subtools {
+        @apply flex;
+        @apply items-center justify-end;
+        @apply w-1/2 h-auto;
+    }
+
+    main .content .breadcrumb {
+        @apply flex;
+        @apply items-center justify-start;
+        @apply py-3 m-0 mb-6;
+        @apply text-xs leading-3;
+        @apply border-b;
+        @apply text-accent/35 border-accent/35;
+    }
+
+    main .content .breadcrumb a {
+        @apply text-accent/35;
+        @apply hover:text-accent/50;
+    }
+
+    main .content .breadcrumb .home,
+    main .content .breadcrumb a box-icon {
+        @apply w-4 h-4;
+        @apply fill-accent/35;
+    }
+
+    main .content .breadcrumb a:hover box-icon {
+        @apply fill-accent/50;
+    }
+
+    main .content .breadcrumb .step {
+        @apply p-0 m-0 ml-3 pt-0.5;
+        @apply before:content-['>'] before:mr-3;
+    }
+
+    main .content article {
+        @apply flex-1;
+        @apply px-6;
+    }
+
+    main .content footer {
+        @apply flex flex-row;
+        @apply w-full min-h-8;
+        @apply p-0 py-6 m-0 mt-6;
+        @apply border-t;
+        @apply border-accent/35 bg-secondary/75;
+    }
+
+    main .content footer section {
+        @apply flex;
+        @apply items-center justify-center;
+        @apply w-1/2;
+        @apply text-xs leading-3;
+        @apply text-accent;
+    }
+
+    main .content footer section a {
+        @apply w-5 h-5;
+        @apply mr-1;
+        @apply fill-accent;
+        @apply hover:fill-accent/50;
+    }
+
+    main .content footer section.right span {
+        @apply mr-2;
+    }
+
+    main .content footer section.right a {
+        @apply w-4 h-4;
+        @apply mx-1;
+    }
+
+    main .content footer section.right a box-icon {
+        @apply w-4 h-4;
+    }
+
+    body {
+        @apply relative;
+    }
+
+    .user-dropdown {
+        @apply flex items-center;
+        @apply text-xs;
+    }
+
+    .user-dropdown button {
+        @apply align-middle text-accent;
+        @apply focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent;
+    }
+
+    .user-dropdown button svg {
+        @apply inline-flex w-4 h-4 -mt-2;
+        @apply fill-accent;
+    }
+
+    .user-dropdown ul {
+        @apply absolute right-0 top-[30px] flex flex-col;
+        @apply min-w-24;
+        @apply overflow-hidden shadow-sm shadow-accent/35;
+        @apply border bg-primary border-accent/35;
+    }
+
+    .user-dropdown ul li:first-of-type div {
+        @apply flex flex-col;
+        @apply w-full;
+        @apply mb-1;
+        @apply items-start justify-start;
+        @apply border-b border-accent/35;
+    }
+
+    .user-dropdown ul li:first-of-type div span {
+        @apply text-xs leading-none text-left;
+        @apply w-full h-auto;
+        @apply px-6 pt-3 mb-1;
+    }
+
+    .user-dropdown ul li:first-of-type div span + span {
+        @apply text-[10px] leading-none text-left;
+        @apply px-6 pt-0 pb-3 mb-1;
+        @apply text-dark/50;
+    }
+
+    .user-dropdown ul li .item {
+        @apply flex;
+        @apply items-center justify-start;
+        @apply w-full h-auto;
+        @apply py-2.5 px-6 mb-1;
+        @apply text-accent;
+    }
+
+    .user-dropdown ul li .item:hover {
+        @apply text-primary bg-accent/50;
+    }
+
+    .user-dropdown ul li .item.active {
+        @apply border-r-4;
+        @apply border-accent bg-accent/15 hover:bg-accent/50;
+    }
+
+    .user-dropdown ul li .item box-icon {
+        @apply w-5 h-5;
+        @apply mr-1;
+        @apply fill-accent;
+    }
+
+    .user-dropdown ul li .item:hover box-icon {
+        @apply fill-primary;
+    }
+
+    .toast {
+        @apply absolute z-[9999];
+        @apply top-14 right-14;
+        @apply w-auto;
+        @apply rounded-sm;
+        @apply border-l-4 shadow;
+    }
+
+    .toast h6 {
+        @apply w-full;
+        @apply px-3 pt-2;
+        @apply text-sm font-bold uppercase;
+    }
+
+    .toast .message {
+        @apply flex flex-col;
+        @apply w-full;
+        @apply px-3 pb-2;
+        @apply text-xs;
+        @apply text-light;
+    }
+
+    .toast .message span {
+        @apply w-full;
+        @apply mt-1 ml-2;
+    }
+
+    .toast.status,
+    .toast.info,
+    .toast.help {
+        @apply bg-info/85 text-info-darker;
+        @apply shadow-info-darker border-info-darker;
+    }
+
+    .toast.success {
+        @apply bg-success/85 text-success-darker;
+        @apply shadow-success-darker border-success-darker;
+    }
+
+    .toast.warning {
+        @apply bg-warning/85 text-warning-darker;
+        @apply shadow-warning-darker border-warning-darker;
+    }
+
+    .toast.error {
+        @apply bg-danger/85 text-danger-darker;
+        @apply shadow-danger-darker border-danger-darker;
+    }
+
+    #table {
+        @apply table;
+        @apply w-full;
+        @apply border rounded-lg;
+        @apply bg-light/50 border-secondary;
+    }
+
+    #table tbody tr {
+        @apply table-row;
+        @apply border-b;
+        @apply odd:border-primary even:border-light/50;
+        @apply odd:bg-light/50 even:bg-primary;
+        @apply last-of-type:border-b-0;
+        @apply hover:bg-accent/15 hover:cursor-pointer;
+        @apply transition ease-in-out duration-100;
+    }
+
+    #table thead tr th,
+    #table tbody tr td {
+        @apply align-middle;
+        @apply text-xs leading-none text-center text-dark;
+        @apply p-4;
+    }
+
+    #table thead tr th {
+        @apply font-semibold uppercase;
+        @apply py-4;
+        @apply bg-accent text-light;
+        @apply border-r-light/5 border-r last-of-type:border-r-0;
+        @apply hover:cursor-pointer;
+    }
+
+    #table thead tr th svg {
+        @apply inline-flex justify-center items-center;
+        @apply w-3.5 h-3.5;
+        @apply m-0 p-0 -mt-0.5;
+        @apply fill-light/50;
+    }
+
+    #table thead tr th span {
+        @apply flex justify-between items-center;
+    }
+
+    #table thead tr th span .label {
+        @apply w-11/12 text-center;
+    }
+
+    #table thead tr th span.sort-asc,
+    #table thead tr th span.sort-desc {
+        @apply hidden;
+    }
+
+    #table tbody tr td {
+        @apply border-r-accent/15 border-r last-of-type:border-r-0;
+        @apply align-top;
+    }
+
+    #table tfoot tr {
+        @apply bg-accent/20;
+        @apply hover:bg-accent/20 hover:cursor-default;
+    }
+
+    #table tfoot tr td {
+        @apply align-middle;
+        @apply text-xs leading-none text-center text-dark;
+        @apply bg-accent/5;
+        @apply hover:bg-accent/5 hover:cursor-default;
+        @apply p-0;
+    }
+
+    .table-pagination {
+        @apply flex items-center justify-between;
+        @apply m-2;
+        @apply text-[10px] leading-none;
+    }
+
+    .table-pagination .buttons {
+        @apply flex justify-between flex-1 sm:hidden;
+    }
+
+    .table-pagination .details {
+        @apply hidden sm:flex-1 sm:flex sm:items-center sm:justify-between;
+    }
+
+    .table-pagination .details .count {
+        @apply text-[10px] text-accent leading-none dark:text-dark;
+        @apply ml-1.5 mt-0.5;
+    }
+
+    .table-pagination .details .previous {
+        @apply relative z-0 inline-flex rtl:flex-row-reverse;
+    }
+
+    .table-pagination .details box-icon {
+        @apply w-4 h-4;
+    }
+
+    .table-pagination .buttons .arrow-prev,
+    .table-pagination .buttons .arrow-next,
+    .table-pagination .details .arrow-prev,
+    .table-pagination .details .arrow-next,
+    .table-pagination .details .page,
+    .table-pagination .details .element {
+        @apply relative inline-flex items-center justify-center;
+        @apply p-0 -ml-px;
+        @apply w-6 h-6;
+        @apply text-[10px] font-medium text-accent/30 leading-none;
+        @apply bg-accent/10;
+        @apply border border-accent/50 fill-accent/30;
+    }
+
+
+    .table-pagination .buttons .arrow-prev-link,
+    .table-pagination .buttons .arrow-next-link,
+    .table-pagination .details .arrow-prev-link,
+    .table-pagination .details .arrow-next-link,
+    .table-pagination .details .page-link,
+    .table-pagination .details .element {
+        @apply relative inline-flex items-center justify-center;
+        @apply p-0 -ml-px;
+        @apply w-6 h-6;
+        @apply text-[10px] font-medium text-accent leading-none;
+        @apply bg-accent/10;
+        @apply border border-accent/50 fill-accent;
+        @apply cursor-pointer;
+        @apply hover:text-accent/50 hover:bg-accent/50 hover:text-light hover:fill-light;
+        @apply focus:z-10 focus:outline-none focus:ring-0 ring-accent/50 focus:border-accent/50;
+        @apply active:bg-accent/10 active:text-accent;
+        @apply transition ease-in-out duration-150;
+        @apply hover:cursor-pointer;
+    }
+
+    .table-pagination .details .previous .page {
+        @apply bg-accent/75;
+        @apply text-light;
+    }
+
+    #table.provider-list {
+        @apply w-full;
+    }
+
+    /*#table.user-list tr th:first-of-type,
+    #table.provider-list tr th:first-of-type,*/
+    #table.user-list tr td:first-of-type,
+    #table.provider-list tr td:first-of-type {
+        @apply text-left;
+    }
+
+    #table.provider-list tr td:first-of-type {
+        @apply overflow-x-clip whitespace-nowrap;
+    }
+
+    #table tr td.empty {
+        @apply text-center;
+    }
+
+    #table.inactive {
+        @apply border-dark/10;
+    }
+
+    #table.inactive tr th {
+        @apply bg-dark/25 border-dark/10 text-dark/40;
+    }
+
+    #table.inactive tr td {
+        @apply bg-dark/10 border-dark/10 text-dark/50;
+    }
+}
+
+@layer utilities {
+    form.login-form {
+        @apply flex items-center justify-center;
+        @apply w-full h-full;
+    }
+
+    form.login-form .form-content {
+        @apply flex flex-col items-center justify-start;
+        @apply w-96 min-h-40;
+        @apply p-6;
+        @apply shadow-sm shadow-accent/30 bg-accent/10;
+    }
+
+    form.login-form .form-content h2 {
+        @apply w-full;
+        @apply mb-4;
+        @apply text-center;
+    }
+
+    form.login-form .form-content p {
+        @apply w-full;
+        @apply my-6;
+        @apply text-xs text-center;
+    }
+
+    form.login-form .form-content p {
+        @apply !mt-0;
+        @apply h-2;
+        @apply border-b border-accent/35;
+    }
+
+    form.login-form .form-content p > span {
+        @apply px-2;
+        @apply bg-[#c9dbe7];
+    }
+
+    form.login-form .form-content .redirects {
+        @apply flex items-center justify-around;
+        @apply w-full h-4;
+    }
+
+    form.login-form .form-content .redirects a {
+        @apply inline-flex items-center justify-center;
+        @apply text-xs leading-3;
+        @apply text-accent hover:text-accent/50 focus-visible:text-dark focus-visible:fill-dark;
+        @apply fill-accent hover:fill-accent/50 hover:focus-visible:text-dark/50 hover:focus-visible:fill-dark/50;
+    }
+
+    form.login-form .form-content .redirects a box-icon {
+        @apply w-3.5 h-3.5;
+        @apply mr-1 leading-3;
+    }
+
+    form.login-form .form-content .form-block.no-label {
+        @apply my-0;
+    }
+
+    .form-block {
+        @apply w-full h-auto;
+        @apply relative;
+        @apply pb-6 mt-6 mb-0;
+        @apply text-sm;
+        @apply text-dark;
+    }
+
+    .form-block-checkbox {
+        @apply relative;
+        @apply flex flex-row items-center justify-start;
+        @apply pb-6 mt-6 mb-5;
+    }
+
+    .form-block-select {
+        @apply relative flex flex-col;
+        @apply w-full;
+        @apply gap-1;
+        @apply text-dark;
+    }
+
+    .form-block,
+    .form-block input,
+    .form-block textarea,
+    .form-block select,
+    .form-block-checkbox {
+        @apply w-full;
+    }
+
+    .form-block label,
+    .form-block-checkbox label {
+        @apply w-auto;
+    }
+
+    .form-block label {
+        @apply absolute left-3 -top-[18px];
+        @apply text-xs !leading-none text-accent/75;
+    }
+
+    .form-block-checkbox label {
+        @apply ml-2;
+        @apply text-xs !leading-none text-accent/75;
+    }
+
+    .form-block label > span,
+    .form-block-checkbox label > span {
+        @apply text-xs leading-none text-danger/75;
+    }
+
+    .form-block input,
+    .form-block textarea,
+    .form-block select {
+        @apply rounded;
+        @apply px-3 py-2;
+        @apply placeholder:text-dark/25;
+        @apply border-accent/30 focus:border-accent/50;
+        @apply ring-accent/30 focus:ring-accent/25;
+        @apply ring-offset-accent/30 focus:ring-offset-0;
+        @apply outline-accent/30 focus:outline-0;
+        @apply text-xs leading-none text-dark;
+    }
+
+    .form-block textarea {
+        @apply leading-5;
+    }
+
+    .form-block select {
+        @apply p-3 pr-8;
+    }
+
+    .form-block-checkbox input {
+        @apply rounded appearance-none cursor-pointer aspect-square;
+        @apply checked:bg-accent checked:hover:bg-accent;
+        @apply checked:focus:bg-accent checked:focus:hover:bg-accent;
+        @apply checked:border-accent/30;
+        @apply border-accent/30 focus:border-accent/50;
+        @apply ring-accent/30 focus:ring-accent/25;
+        @apply ring-offset-accent/30 focus:ring-offset-0;
+        @apply outline-accent/30 focus:outline-0;
+    }
+
+    .form-block.disabled label,
+    .form-block.readonly label {
+        @apply text-dark/25;
+    }
+
+    .form-block.disabled label > span,
+    .form-block.readonly label > span {
+        @apply text-danger/25;
+    }
+
+    .form-block.disabled input,
+    .form-block.readonly input,
+    .form-block.disabled select,
+    .form-block.readonly select {
+        @apply placeholder:text-accent/10;
+        @apply border-accent/15 focus:border-accent/35;
+        @apply ring-accent/15 focus:ring-accent/10;
+        @apply ring-offset-accent/15;
+        @apply outline-accent/15;
+        @apply text-dark/50 bg-dark/5;
+    }
+
+    .form-block-checkbox.disabled input,
+    .form-block-checkbox.readonly input {
+        @apply checked:bg-accent/10 checked:hover:bg-accent/10;
+        @apply checked:focus:bg-accent/10 checked:focus:hover:bg-accent/10;
+        @apply checked:border-accent/15;
+        @apply border-accent/15 focus:border-accent/35;
+        @apply ring-accent/15 focus:ring-accent/10;
+        @apply ring-offset-accent/15 focus:ring-offset-0;
+        @apply outline-accent/15 focus:outline-0;
+    }
+
+    .form-block.show-error label,
+    .form-block-checkbox.show-error label {
+        @apply text-danger/75
+    }
+
+    .form-block.show-error label > span {
+        @apply text-danger/75;
+    }
+
+    .form-block.show-error input,
+    .form-block.show-error select {
+        @apply placeholder:text-danger/35;
+        @apply border-danger/40 focus:border-danger/60;
+        @apply ring-danger/40 focus:ring-danger/35;
+        @apply ring-offset-danger/40;
+        @apply outline-danger/40;
+        @apply text-danger;
+    }
+
+    .form-block-checkbox.show-error input {
+        @apply checked:bg-danger checked:hover:bg-danger;
+        @apply checked:focus:bg-danger checked:focus:hover:bg-danger;
+        @apply checked:border-danger/30;
+        @apply border-danger/30 focus:border-danger/50;
+        @apply ring-danger/30 focus:ring-danger/25;
+        @apply ring-offset-danger/30 focus:ring-offset-0;
+        @apply outline-danger/30 focus:outline-0;
+    }
+
+    .form-block.show-error .error-detail,
+    .form-block-checkbox.show-error .error-detail {
+        @apply absolute z-[999];
+        @apply -top-2 right-2;
+        @apply w-auto px-1.5 py-1 rounded;
+        @apply bg-danger/80;
+        @apply text-[10px] text-right text-light leading-none;
+        @apply overflow-x-hidden whitespace-nowrap;
+    }
+
+    .form-block.show-error .error-detail + .error-detail {
+        @apply -top-7 right-2;
+    }
+
+    .form-block.show-error .error-detail + .error-detail + .error-detail {
+        @apply -top-12 right-2;
+    }
+
+    .form-block-checkbox.show-error .error-detail {
+        @apply left-4 top-3.5;
+        @apply w-48 p-0.5 rounded;
+        @apply text-center;
+    }
+
+    .form-block-checkbox.show-error .error-detail + .error-detail {
+        @apply left-4 -top-2.5;
+    }
+
+    .form-block-checkbox.show-error .error-detail + .error-detail + .error-detail {
+        @apply left-4 -top-8;
+    }
+
+    .form-block.password {
+        @apply relative;
+    }
+
+    .form-block.password input {
+        @apply pr-9;
+    }
+
+    .form-block.password input + span {
+        @apply absolute right-2.5 top-[9px];
+        @apply w-5 h-5;
+        @apply cursor-auto hover:cursor-pointer;
+        @apply fill-dark/50;
+    }
+
+    .form-block.password input + span box-icon {
+        @apply w-5 h-5;
+        @apply p-0 m-0;
+    }
+
+    form.login-form .form-content .form-block-checkbox {
+        @apply my-0;
+    }
+
+    button.form-block {
+        @apply inline-flex items-center justify-center;
+        @apply p-2 mt-0 mb-5;
+        @apply bg-dark;
+        @apply border-0;
+        @apply rounded;
+        @apply text-xs font-semibold tracking-widest uppercase;
+        @apply fill-light text-light;
+        @apply hover:bg-dark/75 active:bg-dark focus:outline-none focus:border-dark/50;
+        @apply transition-all duration-200 ease-in-out;
+    }
+
+    button.form-block box-icon {
+        @apply w-4 h-4;
+        @apply mr-2;
+    }
+
+    .card-holder {
+        @apply flex flex-row;
+        @apply items-center justify-center;
+        @apply w-1/4 h-auto;
+        @apply px-6 pt-6 mb-0 last-of-type:mb-6;
+        @apply border-b-2 first-of-type:border-t-2;
+        @apply border-secondary bg-secondary/35;
+    }
+
+    .card-holder.double {
+        @apply items-center justify-between;
+        @apply w-1/2;
+        @apply space-x-6;
+    }
+
+    .card-holder .form-block {
+        @apply my-0 mt-4;
+    }
+
+    .card-holder .form-block-checkbox {
+        @apply mt-6 mb-3;
+    }
+
+    .card-holder .form-block + .form-block-checkbox {
+        @apply h-14;
+        @apply mt-4 mb-0;
+    }
+
+    .form-block.no-label,
+    .card-holder .form-block.no-label {
+        @apply mt-0 mb-1;
+    }
+
+    .form-block.no-label + .form-block-checkbox,
+    .card-holder .form-block.no-label + .form-block-checkbox {
+        @apply mt-0 mb-1;
+        @apply h-auto;
+    }
+
+    .card-holder.double button.form-block {
+        @apply w-1/2;
+        @apply m-0 mb-5 ml-auto;
+    }
+
+    .user-profile,
+    .provider-profile {
+        @apply flex flex-row;
+        @apply items-start justify-start;
+        @apply space-x-6;
+        @apply w-full h-auto;
+    }
+
+    .user-profile .profile-data,
+    .provider-profile .profile-data {
+        @apply w-2/3;
+    }
+
+    .user-profile .account-data,
+    .provider-profile .account-data {
+        @apply w-1/3;
+    }
+
+    .user-profile form,
+    .provider-profile form {
+        @apply flex flex-row;
+        @apply w-full;
+        @apply text-xs text-dark;
+    }
+
+    .user-profile form .form-column,
+    .provider-profile form .form-column {
+        @apply flex flex-col;
+        @apply w-1/2 h-full;
+    }
+
+    .user-profile form .form-column,
+    .provider-profile form .form-column {
+        @apply mr-3;
+    }
+
+    .user-profile form .form-column + .form-column,
+    .provider-profile form .form-column + .form-column {
+        @apply ml-3 mr-0;
+    }
+
+    .user-profile .account-data form:first-of-type,
+    .provider-profile .account-data form:first-of-type {
+        @apply mb-6;
+    }
+
+    .user-profile .card-holder,
+    .provider-profile .card-holder {
+        @apply w-1/2;
+    }
+
+    .user-profile .card-holder.double,
+    .provider-profile .card-holder.double {
+        @apply w-full;
+        @apply last-of-type:mb-0;
+    }
+
+    .user-profile .card-holder.double.center input,
+    .provider-profile .card-holder.double.center input {
+        @apply text-center;
+    }
+
+    .user-profile .card-holder.double.address {
+        @apply flex flex-col;
+        @apply items-center justify-between;
+        @apply w-full;
+        @apply space-x-0;
+    }
+
+    .user-profile .card-holder.double.address .block {
+        @apply flex flex-row;
+        @apply items-center justify-between;
+        @apply w-full;
+        @apply space-x-6;
+    }
+
+    .user-profile .delete-user .card-holder.double,
+    .provider-profile .delete-user .card-holder.double {
+        @apply first-of-type:pb-6;
+        @apply bg-danger/15 text-danger/75 border-danger/15;
+    }
+
+    .delete-user .card-holder.double button.form-block {
+        @apply bg-danger/75 hover:bg-danger;
+    }
+}
