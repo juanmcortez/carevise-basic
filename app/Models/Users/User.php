@@ -29,6 +29,8 @@ class User extends Authenticatable
     protected $fillable = [
         'username',
         'password',
+        'is_active',
+        'is_provider',
         'demographic_id',
         'remember_token',
     ];
@@ -41,6 +43,8 @@ class User extends Authenticatable
     protected $hidden = [
         'id',
         'password',
+        'is_active',
+        'is_provider',
         'demographic_id',
         'remember_token',
         'created_at',
@@ -56,7 +60,9 @@ class User extends Authenticatable
     protected function casts(): array
     {
         return [
-            'password' => 'hashed',
+            'password'      => 'hashed',
+            'is_active'     => 'boolean',
+            'is_provider'   => 'boolean',
         ];
     }
 

@@ -8,16 +8,16 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::table('users', static function (Blueprint $table) {
-            /*$table->boolean('is_active')
+            $table->boolean('is_active')
                 ->default(true)
-                ->after('id');
+                ->after('password');
 
             $table->boolean('is_provider')
                 ->default(false)
-                ->after('is_active');*/
+                ->after('is_active');
 
             $table->foreignId('demographic_id')
-                ->after('password')
+                ->after('is_provider')
                 ->constrained('demographics')
                 ->cascadeOnUpdate()
                 ->cascadeOnDelete();
