@@ -10,14 +10,14 @@ return new class extends Migration {
         Schema::create('demographics_addresses', function (Blueprint $table) {
             $table->id();
 
-            $table->string('street')->nullable();
-            $table->string('street_extended')->nullable();
+            $table->string('street', 128)->nullable();
+            $table->string('street_extended', 128)->nullable();
 
-            $table->string('city')->nullable();
-            $table->string('state')->nullable();
-            $table->string('postal_code')->nullable();
+            $table->string('city', 64)->nullable();
+            $table->string('state', 64)->nullable();
+            $table->string('postal_code', 16)->nullable();
 
-            $table->string('country_code')->nullable();
+            $table->string('country_code', 4)->nullable();
 
             $table->timestamps();
             $table->softDeletes();
