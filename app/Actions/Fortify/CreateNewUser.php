@@ -4,7 +4,9 @@ namespace App\Actions\Fortify;
 
 use Carbon\Carbon;
 use App\Models\Users\User;
+use App\Models\Commons\Phone;
 use Illuminate\Validation\Rule;
+use App\Models\Commons\Address;
 use App\Models\Commons\Demographic;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Commons\EmailAddress;
@@ -51,7 +53,11 @@ class CreateNewUser implements CreatesNewUsers
                 'middle_name' => $input['middle_name'],
                 'last_name' => $input['last_name'],
                 'birthdate' => Carbon::now(),
+                'about_me' => null,
                 'email_address_id' => $email_address->id,
+                'address_id' => Address::factory()->withEmptyFields()->create(),
+                'phone_id' => Phone::factory()->withEmptyFields()->create(),
+                'cellphone_id' => Phone::factory()->withEmptyFields()->create(),
             ]);
 
         // Create and return the new user

@@ -20,9 +20,11 @@ Route::middleware(['auth'])->group(function () {
             // System user routes
             Route::get('/users/list', 'show')->name('list');
             Route::get('/users/{user}/profile/edit', 'edit')->name('profile.edit');
+            Route::get('/users/profile/new', 'create')->name('profile.new');
             // System user routes
 
             // Common user routes
+            Route::post('/users/create', 'store')->name('create');
             Route::patch('/users/update', 'update')->name('update');
             // Common user routes
         });
