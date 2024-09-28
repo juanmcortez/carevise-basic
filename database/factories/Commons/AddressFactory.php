@@ -10,6 +10,9 @@ class AddressFactory extends Factory
 {
     protected $model = Address::class;
 
+    /**
+     * @return array
+     */
     public function definition(): array
     {
         $fullAddress = $street = $this->faker->streetAddress();
@@ -24,12 +27,23 @@ class AddressFactory extends Factory
         }
 
         return [
-            'street'            => $street,
-            'street_extended'   => $streetExtended,
-            'city'              => $this->faker->city(),
-            'state'             => 'New Jersey',
-            'postal_code'       => $this->faker->postcode(),
-            'country_code'      => 'us',
+            'street' => $street,
+            'street_extended' => $streetExtended,
+            'city' => $this->faker->city(),
+            'state' => 'New Jersey',
+            'postal_code' => $this->faker->postcode(),
+            'country_code' => 'us',
         ];
+    }
+
+    public function withEmptyFields()
+    {
+        return $this->state(function (array $attributes) {
+            $fields = ['street', 'street_extended', 'city', 'state', 'postal_code', 'country_code'];
+            foreach ($fields as $field) {
+                $attributes[$field] = null;
+            }
+            return $attributes;
+        });
     }
 }

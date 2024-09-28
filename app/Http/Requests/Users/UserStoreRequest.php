@@ -2,11 +2,13 @@
 
 namespace App\Http\Requests\Users;
 
+use App\Models\Users\User;
 use Illuminate\Validation\Rule;
+use Illuminate\Validation\Rules\Password;
 use Illuminate\Foundation\Http\FormRequest;
 use App\Http\Requests\Commons\DemographicRequest;
 
-class UserUpdateRequest extends FormRequest
+class UserStoreRequest extends FormRequest
 {
     private array $demographic_rules;
     private array $demographic_attributes;
@@ -26,8 +28,8 @@ class UserUpdateRequest extends FormRequest
     {
         // Prepare the "is active" / "is provider" checkboxes status for validation
         $this->merge([
-            'is_active' => (bool) $this->is_active,
-            'is_provider' => (bool) $this->is_provider,
+            'is_active' => true,
+            'is_provider' => false,
         ]);
     }
 
@@ -46,10 +48,11 @@ class UserUpdateRequest extends FormRequest
 
         return array_merge(
             [
-                'username' => ['required', 'string', 'max:64'],
+                'username' => ['required', 'string', 'max:64', Rule::unique(User::class)],
+                'password' => ['required', 'confirmed', Password::defaults()],
+                'password_confirmation' => ['required_with:password', Password::defaults()],
                 'is_active' => ['boolean'],
                 'is_provider' => ['nullable', 'boolean'],
-                'demographic_id' => [Rule::exists('demographics', 'id')],
             ],
             $this->demographic_rules,
         );
@@ -71,6 +74,8 @@ class UserUpdateRequest extends FormRequest
         return array_merge(
             [
                 'username' => '<strong>Username</strong>',
+                'password' => '<strong>Password</strong>',
+                'password_confirmation' => '<strong>Confirm password</strong>',
                 'is_active' => '<strong>Is active checkbox</strong>',
                 'is_provider' => '<strong>Is provider checkbox</strong>',
                 'demographic_id' => '<strong>Demographic info</strong>',

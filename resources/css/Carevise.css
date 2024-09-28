@@ -679,12 +679,12 @@
 
     .form-block label {
         @apply absolute left-3 -top-[18px];
-        @apply text-xs !leading-none text-accent/75;
+        @apply text-xs leading-none text-accent/75;
     }
 
     .form-block-checkbox label {
         @apply ml-2;
-        @apply text-xs !leading-none text-accent/75;
+        @apply text-xs leading-none text-accent/75;
     }
 
     .form-block label > span,
@@ -710,7 +710,8 @@
     }
 
     .form-block select {
-        @apply p-3 pr-8;
+        @apply px-3 py-2.5 pr-8;
+        @apply leading-4;
     }
 
     .form-block-checkbox input {
@@ -980,15 +981,17 @@
     }
 
     .user-profile .card-holder.double.phones {
-        @apply space-x-2;
+        @apply space-x-0.5;
     }
 
-    .user-profile .card-holder.double.phones .form-block.split {
-        @apply mr-3;
+    .user-profile .card-holder.double.phones .form-block input {
+        @apply px-0 text-center;
     }
 
-    .user-profile .card-holder.double.phones .form-block.split + .form-block {
-        @apply ml-3;
+    .user-profile .card-holder.double.phones .form-block + .split {
+        @apply flex flex-row;
+        @apply m-0 px-3 py-0;
+        @apply w-6 h-6 leading-5;
     }
 
     .user-profile .delete-user .card-holder.double,

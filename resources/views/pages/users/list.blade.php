@@ -5,7 +5,7 @@
     </x-slot>
 
     {{-- The content that is placed here, will display as the page submenu --}}
-    <x-slot:subMenu>users</x-slot>
+    <x-slot:subMenu>user</x-slot>
 
     {{-- The content that is placed here, will display as the page content --}}
     <x-tables.simple x-data class="user-list"
