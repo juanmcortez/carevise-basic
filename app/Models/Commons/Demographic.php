@@ -56,7 +56,7 @@ class Demographic extends Model
     protected function casts(): array
     {
         return [
-            'birthdate' => 'datetime:M d, Y',
+            'birthdate' => 'datetime',
         ];
     }
 
@@ -75,12 +75,13 @@ class Demographic extends Model
      */
     protected function completeName(): Attribute
     {
-        if(!empty($this->last_name) && !empty($this->first_name)) {
+        if (!empty($this->last_name) && !empty($this->first_name)) {
             return new Attribute(
-                get: fn() => $this->last_name . ', ' . $this->first_name . ((!empty($this->middle_name)) ? ' ' . $this->middle_name : null),
+                get: fn(
+                ) => $this->last_name.', '.$this->first_name.((!empty($this->middle_name)) ? ' '.$this->middle_name : null),
             );
         }
-        return new Attribute(get: fn () => null);
+        return new Attribute(get: fn() => null);
     }
 
     /**
@@ -88,12 +89,29 @@ class Demographic extends Model
      */
     protected function age(): Attribute
     {
-        if(!empty($this->birthdate)) {
+        if (!empty($this->birthdate)) {
             return new Attribute(
                 get: fn() => Carbon::parse($this->birthdate)->age,
             );
         }
-        return new Attribute(get: fn () => null);
+        return new Attribute(get: fn() => null);
+    }
+
+    /**
+     * Return the model birthdate attribute for db storage.
+     */
+    protected function birthdate(): Attribute
+    {
+        return Attribute::make(
+            get: function ($value) {
+                // If value exists, parse and format the birthdate
+                return $value ? Carbon::parse($value)->format(config('carevise.formats.date')) : null;
+            },
+            set: function ($value) {
+                // If value is not null, parse and format it for the DB, otherwise return null
+                return $value ? Carbon::parse($value)->format(config('carevise.formats.db_datetime')) : null;
+            }
+        );
     }
 
     /**

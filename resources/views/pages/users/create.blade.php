@@ -89,7 +89,7 @@
                     <div class="card-holder double">
                         <x-forms.button type="submit">
                             <box-icon name='save'></box-icon>
-                            {{ __('Profile update') }}
+                            {{ __('Create User') }}
                         </x-forms.button>
                     </div>
                 </div>

@@ -20,7 +20,7 @@
             @foreach ($users as $user)
                 <tr x-on:click="window.location.href='{{ route('user.profile.edit', ['user' => $user->username]) }}'">
                     <td class="!text-left">{{ $user->demographic->complete_name }}</td>
-                    <td>{{ $user->demographic->birthdate->format('M d, Y') }}</td>
+                    <td>{{ $user->demographic->birthdate }}</td>
                     <td>{{ \Str::title(__($user->demographic->gender)) }}</td>
                     <td>{{ $user->demographic->email_address->email }}</td>
                     <td class="!text-left">{!! $user->demographic->address->formatted !!}</td>
