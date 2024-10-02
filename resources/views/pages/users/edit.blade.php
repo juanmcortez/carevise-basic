@@ -37,7 +37,7 @@
 
                     <div class="card-holder double">
                         <x-forms.input name="demographic[birthdate]" :label="__('Birthdate')"
-                                       :value="old('demographic.birthdate', $user->demographic->birthdate->format(config('carevise.formats.date')))"
+                                       :value="old('demographic.birthdate', $user->demographic->birthdate)"
                                        required auto/>
                         <x-forms.select name="demographic[gender]" :label="__('Gender')"
                                         :items="['male' => 'Male', 'female' => 'Female']"
