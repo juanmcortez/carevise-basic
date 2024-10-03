@@ -17,6 +17,8 @@
         {{ __('Log Out') }}
     </x-commons.link>
 </form>
+
+{{-- USERS --}}
 <h6 class="menu">{{ __('Users') }}</h6>
 <x-commons.link :class="request()->routeIs('user.list') ? 'item active' : 'item'" :route="route('user.list')">
     <box-icon type='solid' name='user-detail'></box-icon>
@@ -27,3 +29,6 @@
     <box-icon type='solid' name='user-plus'></box-icon>
     {{ __('Create') }}
 </x-commons.link>
+
+{{-- PROVIDERS --}}
+@include('components.layouts.submenus.providers')

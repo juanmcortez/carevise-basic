@@ -14,7 +14,7 @@
                      :pagination="$users->links()">
         @if ($users->isEmpty())
             <tr>
-                <td colspan="5">{{ __('There are no users to display') }}</td>
+                <td colspan="7" class="!text-center">{{ __('There are no users to display') }}</td>
             </tr>
         @else
             @foreach ($users as $user)
