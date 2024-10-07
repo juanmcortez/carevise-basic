@@ -64,8 +64,8 @@
             </x-commons.link>
 
             <h6 class="menu">{{ __('Providers') }}</h6>
-            <x-commons.link :class="request()->routeIs('providers.list') ? 'item active' : 'item'"
-                            :route="route('dashboard')"
+            <x-commons.link :class="request()->routeIs('provider.*') ? 'item active' : 'item'"
+                            :route="route('provider.list')"
                             :title="__('Providers')">
                 <box-icon type='solid' name='user-detail'></box-icon>
             </x-commons.link>
