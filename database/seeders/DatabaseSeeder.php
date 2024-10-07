@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Users\User;
 use App\Models\Commons\Phone;
+use App\Models\Users\Provider;
 use Illuminate\Database\Seeder;
 use App\Models\Commons\Address;
 use App\Models\Commons\Demographic;
@@ -32,5 +33,8 @@ class DatabaseSeeder extends Seeder
 
         // Create some random additional users
         User::factory(2)->create();
+
+        // Create some random additional providers
+        Provider::factory(12)->create();
     }
 }
