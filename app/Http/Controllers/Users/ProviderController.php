@@ -9,42 +9,29 @@ use Redirect;
 use Illuminate\View\View;
 use App\Models\Users\User;
 use App\Models\Commons\Phone;
+use App\Models\Users\Provider;
 use App\Models\Commons\Address;
 use App\Models\Commons\Demographic;
 use App\Http\Controllers\Controller;
 use App\Models\Commons\EmailAddress;
 use Illuminate\Http\RedirectResponse;
-use App\Http\Requests\Users\UserStoreRequest;
-use App\Http\Requests\Users\UserUpdateRequest;
+use App\Http\Requests\Users\ProviderStoreRequest;
+use App\Http\Requests\Users\ProviderUpdateRequest;
 
-class UserController extends Controller
+class ProviderController extends Controller
 {
     /**
      * @return View
      */
     public function index(): View
     {
-        return view('pages.users.edit', ['user' => Auth::user()]);
-    }
-
-    /**
-     * @return View
-     */
-    public function show(): View
-    {
-        $users = User::whereIsActive(true)
-            ->whereIsProvider(false)
-            ->whereNot('username', Auth::user()->username)
-            ->with('demographic', 'demographic.email_address', 'demographic.address', 'demographic.phone',
-                'demographic.cellphone')
-            ->join('demographics', 'demographics.id', '=', 'users.demographic_id')
-            ->orderBy('demographics.last_name')
-            ->orderBy('demographics.first_name')
-            ->orderBy('demographics.middle_name')
-            ->select('users.*')
+        $providers = Provider::with('user', 'user.demographic', 'user.demographic.email_address',
+            'user.demographic.address',
+            'user.demographic.phone',
+            'user.demographic.cellphone')
             ->paginate(config('carevise.pagination.size'));
 
-        return view('pages.users.list', compact('users'));
+        return view('pages.providers.list', compact('providers'));
     }
 
     /**
@@ -52,32 +39,30 @@ class UserController extends Controller
      */
     public function create(): View
     {
-        return view('pages.users.create');
+        return view('pages.providers.create');
     }
 
     /**
-     * @param  UserStoreRequest  $request
+     * @param  ProviderStoreRequest  $request
      * @return RedirectResponse
      */
-    public function store(UserStoreRequest $request): RedirectResponse
+    public function store(ProviderStoreRequest $request): RedirectResponse
     {
         // Defaults
         DB::beginTransaction();
         $status = 'warning';
-        $message = __('There was an issue creating the new user. Please try again later.');
+        $message = __('There was an issue creating the new provider. Please try again later.');
         // Validated info
-        $user_data = Arr::except(
-            $request->validated(),
-            ['password_confirmation', 'demographic']
-        );
+        $provider_data = Arr::except($request->validated(), ['user']);
+        $user_data = Arr::except($request->validated('user'), ['password_confirmation', 'demographic']);
         $demographic_data = Arr::except(
-            $request->validated('demographic'),
+            $request->validated('user.demographic'),
             ['email_address', 'address', 'phone', 'cellphone']
         );
-        $email_data = $request->validated('demographic.email_address');
-        $address_data = $request->validated('demographic.address');
-        $phone_data = $request->validated('demographic.phone');
-        $cellphone_data = $request->validated('demographic.cellphone');
+        $email_data = $request->validated('user.demographic.email_address');
+        $address_data = $request->validated('user.demographic.address');
+        $phone_data = $request->validated('user.demographic.phone');
+        $cellphone_data = $request->validated('user.demographic.cellphone');
         // Create the validated info
         try {
             $email = EmailAddress::create($email_data);
@@ -96,14 +81,15 @@ class UserController extends Controller
                 )
             );
             $user = User::create(array_merge($user_data, ['demographic_id' => $demographic->id]));
+            $provider = Provider::create(array_merge($provider_data, ['user_id' => $user->id]));
             DB::commit();
-            if ($user && $demographic && $email && $address && $phone && $cellphone) {
+            if ($provider && $user && $demographic && $email && $address && $phone && $cellphone) {
                 $status = 'success';
                 $message = __(
-                    'User <strong>:user</strong> has been created!.',
+                    'Provider <strong>:user</strong> has been created!.',
                     ['user' => $user->demographic->complete_name]
                 );
-                return Redirect::route('user.profile.edit', ['user' => $user])->with($status, $message);
+                return Redirect::route('provider.profile.edit', ['user' => $user])->with($status, $message);
             }
             // Response
             return Redirect::back()->with($status, $message);
@@ -115,42 +101,57 @@ class UserController extends Controller
     }
 
     /**
+     * @param  Provider  $provider
+     * @return void
+     */
+    public function show(Provider $provider): void
+    {
+        abort(404);
+    }
+
+    /**
      * @param  User  $user
      * @return View
      */
     public function edit(User $user): View
     {
-        return view('pages.users.edit', compact('user'));
+        $provider = $user->provider;
+        return view('pages.providers.edit', compact('provider'));
     }
 
     /**
-     * @param  UserUpdateRequest  $request
+     * @param  ProviderUpdateRequest  $request
      * @return RedirectResponse
      */
-    public function update(UserUpdateRequest $request): RedirectResponse
+    public function update(ProviderUpdateRequest $request): RedirectResponse
     {
         // Defaults
         DB::beginTransaction();
         $status = 'warning';
         $message = __(
-            'There was an issue updating <strong>:username</strong>\'s profile information. Please try again later.',
+            'There was an issue updating <strong>:username</strong>\'s provider information. Please try again later.',
             [
-                'username' => $request->user()->demographic->complete_name ?? ($request->user()->username ?? $request->validated('username'))
+                'username' => $request->provider->user->demographic->complete_name ?? ($request->provider->user->username ?? $request->validated('username'))
             ]
         );
         // Validated info
-        $user_data = $request->safe()->except(['demographic']);
-        $demographic_data = $request->validated('demographic');
-        $email_data = $request->validated('demographic.email_address');
-        $address_data = $request->validated('demographic.address');
-        $phone_data = $request->validated('demographic.phone');
-        $cellphone_data = $request->validated('demographic.cellphone');
+        $provider_data = Arr::except($request->validated(), ['user']);
+        $user_data = Arr::except($request->validated('user'), ['demographic']);
+        $demographic_data = Arr::except(
+            $request->validated('user.demographic'),
+            ['email_address', 'address', 'phone', 'cellphone']
+        );
+        $email_data = $request->validated('user.demographic.email_address');
+        $address_data = $request->validated('user.demographic.address');
+        $phone_data = $request->validated('user.demographic.phone');
+        $cellphone_data = $request->validated('user.demographic.cellphone');
         // Get the user being updated
         try {
             $user = User::whereUsername($user_data['username'])->firstOrFail();
             // Update the validated info
             DB::commit();
             if (
+                $user->provider->update($provider_data) &&
                 $user->update($user_data) &&
                 $user->demographic->update($demographic_data) &&
                 $user->demographic->email_address->update($email_data) &&
@@ -159,16 +160,16 @@ class UserController extends Controller
                 $user->demographic->cellphone->update($cellphone_data)
             ) {
                 // If the user is being de-activated
-                if (!$request->validated('is_active')) {
+                if (!$request->validated('user.is_active') && !$user->is_active) {
                     $status = 'info';
-                    $message = __('The user <strong>:username</strong>\'s has been de-activated.',
+                    $message = __('The provider <strong>:username</strong>\'s has been de-activated.',
                         [
                             'username' => $user->demographic->complete_name ?? ($user->username ?? $request->validated('username'))
                         ]
                     );
                 } else {
                     $status = 'success';
-                    $message = __('<strong>:username</strong>\'s profile information has been updated successfully!',
+                    $message = __('<strong>:username</strong>\'s provider information has been updated successfully!',
                         [
                             'username' => $user->demographic->complete_name ?? ($user->username ?? $request->validated('username'))
                         ]
@@ -178,22 +179,23 @@ class UserController extends Controller
 
             // Response
             if ($user->username === Auth::user()->username) {
-                return Redirect::route('user.self.edit')->with($status, $message);
+                return Redirect::route('provider.profile.edit')->with($status, $message);
             }
-            return Redirect::route('user.list')->with($status, $message);
+            return Redirect::route('provider.list')->with($status, $message);
             // Response
 
         } catch (\Exception $e) {
             DB::rollBack();
             // Response
-            return Redirect::route('user.list')->with($status, $message);
+            return Redirect::route('provider.list')->with($status, $message);
         }
     }
 
     /**
+     * @param  Provider  $provider
      * @return void
      */
-    public function delete(): void
+    public function destroy(Provider $provider): void
     {
         abort(404);
     }
