@@ -182,7 +182,7 @@ class UserController extends Controller
             }
             return Redirect::route('user.list')->with($status, $message);
             // Response
-            
+
         } catch (\Exception $e) {
             DB::rollBack();
             // Response

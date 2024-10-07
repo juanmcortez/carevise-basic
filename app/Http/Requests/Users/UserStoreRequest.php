@@ -29,7 +29,7 @@ class UserStoreRequest extends FormRequest
         // Prepare the "is active" / "is provider" checkboxes status for validation
         $this->merge([
             'is_active' => true,
-            'is_provider' => false,
+            'is_provider' => (bool) $this->is_provider,
         ]);
     }
 
@@ -48,7 +48,7 @@ class UserStoreRequest extends FormRequest
 
         return array_merge(
             [
-                'username' => ['required', 'string', 'max:64', Rule::unique(User::class)],
+                'username' => ['required', 'string', 'max:64', Rule::unique(User::class, 'username')],
                 'password' => ['required', 'confirmed', Password::defaults()],
                 'password_confirmation' => ['required_with:password', Password::defaults()],
                 'is_active' => ['boolean'],
@@ -78,7 +78,6 @@ class UserStoreRequest extends FormRequest
                 'password_confirmation' => '<strong>Confirm password</strong>',
                 'is_active' => '<strong>Is active checkbox</strong>',
                 'is_provider' => '<strong>Is provider checkbox</strong>',
-                'demographic_id' => '<strong>Demographic info</strong>',
             ],
             $this->demographic_attributes,
         );

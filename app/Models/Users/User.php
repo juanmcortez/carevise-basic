@@ -60,20 +60,31 @@ class User extends Authenticatable
     protected function casts(): array
     {
         return [
-            'password'      => 'hashed',
-            'is_active'     => 'boolean',
-            'is_provider'   => 'boolean',
+            'password' => 'hashed',
+            'is_active' => 'boolean',
+            'is_provider' => 'boolean',
         ];
     }
 
     /**
-     * Demographic address relationship to model
+     * Demographic relationship to model
      *
      * @return HasOne
      */
     public function demographic(): HasOne
     {
         return $this->hasOne(Demographic::class, 'id', 'demographic_id')
+            ->withDefault();
+    }
+
+    /**
+     * Provider relationship to model
+     *
+     * @return HasOne
+     */
+    public function provider(): HasOne
+    {
+        return $this->HasOne(Provider::class, 'user_id', 'id')
             ->withDefault();
     }
 }
