@@ -12,8 +12,8 @@
             </x-commons.link>
 
             <h6 class="menu">{{ __('Patients') }}</h6>
-            <x-commons.link :class="request()->routeIs('patients.list') ? 'item active' : 'item'"
-                            :route="route('dashboard')"
+            <x-commons.link :class="request()->routeIs('patient.list') ? 'item active' : 'item'"
+                            :route="route('patient.list')"
                             :title="__('List')">
                 <box-icon type='solid' name='user-detail'></box-icon>
             </x-commons.link>
