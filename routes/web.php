@@ -4,11 +4,19 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Users\UserController;
 use App\Http\Controllers\Main\DashboardController;
 use App\Http\Controllers\Users\ProviderController;
+use App\Http\Controllers\Patients\PatientController;
 
 // Routes are accesible if the user is logged in
 Route::middleware(['auth'])->group(function () {
     // Dashboard route
     Route::get('/', DashboardController::class)->name('dashboard');
+
+    // Patients routes
+    Route::controller(PatientController::class)
+        ->name('patient.')
+        ->group(function () {
+            Route::get('/patients/list', 'index')->name('list');
+        });
 
     // Providers routes
     Route::controller(ProviderController::class)
