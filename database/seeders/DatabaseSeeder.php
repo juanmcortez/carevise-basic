@@ -7,6 +7,7 @@ use App\Models\Commons\Phone;
 use App\Models\Users\Provider;
 use Illuminate\Database\Seeder;
 use App\Models\Commons\Address;
+use App\Models\Patients\Patient;
 use App\Models\Commons\Demographic;
 use App\Models\Commons\EmailAddress;
 
@@ -36,5 +37,8 @@ class DatabaseSeeder extends Seeder
 
         // Create some random additional providers
         Provider::factory(12)->create();
+
+        // Create some random additional providers
+        Patient::factory(fake()->randomNumber(2, true))->create();
     }
 }
