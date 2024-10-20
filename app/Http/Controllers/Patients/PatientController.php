@@ -23,4 +23,13 @@ class PatientController extends Controller
             ->paginate(config('carevise.pagination.long'));
         return view('pages.patients.list', compact('patients'));
     }
+
+    /**
+     * @param  Patient  $patient
+     * @return View
+     */
+    public function show(Patient $patient): View
+    {
+        return view('pages.patients.show', compact('patient'));
+    }
 }
