@@ -16,6 +16,7 @@ Route::middleware(['auth'])->group(function () {
         ->name('patient.')
         ->group(function () {
             Route::get('/patients/list', 'index')->name('list');
+            Route::get('/patient/{patient}/details/', 'show')->name('show');
         });
 
     // Providers routes
