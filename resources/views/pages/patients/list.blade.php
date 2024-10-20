@@ -10,8 +10,8 @@
 
     {{-- The content that is placed here, will display as the page content --}}
     <x-tables.simple x-data class="patient-list"
-                     :columnsWidth="['w-4/12', 'w-2/12', 'w-2/12', 'w-2/12', 'w-1/12', 'w-1/12']"
-                     :columnsLabel="['Name', 'Birthdate', 'Gender', 'Phone', 'PID', 'EID']"
+                     :columnsWidth="['w-3/12', 'w-2/12', 'w-2/12', 'w-1/12', 'w-1/12', 'w-1/12', 'w-1/12', 'w-1/12']"
+                     :columnsLabel="['Name', 'Phone', 'SSN', 'Birthdate', 'Accession #', 'EID', 'PID', 'Last Visit']"
                      :pagination="$patients->links()">
         @if ($patients->isEmpty())
             <tr>
@@ -19,13 +19,15 @@
             </tr>
         @else
             @foreach ($patients as $patient)
-                <tr {{--x-on:click="window.location.href='{{ route('user.profile.edit', ['user' => $user->username]) }}'"--}}>
+                <tr x-on:click="window.location.href='{{ route('patient.show', ['patient' => $patient->pid]) }}'">
                     <td class="!text-left">{{ $patient->demographic->complete_name }}</td>
-                    <td>{{ $patient->demographic->birthdate }}</td>
-                    <td>{{ \Str::title(__($patient->demographic->gender)) }}</td>
                     <td>{{ $patient->demographic->phone->formatted }}</td>
+                    <td> --</td>
+                    <td>{{ $patient->demographic->birthdate }}</td>
+                    <td> --</td>
+                    <td>{{ ($patient->eid) ?? '--' }}</td>
                     <td>{{ $patient->pid }}</td>
-                    <td>{{ $patient->eid }}</td>
+                    <td> --</td>
                 </tr>
             @endforeach
         @endif

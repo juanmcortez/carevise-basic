@@ -26,20 +26,20 @@
 <body @Auth id="carevise" @else id="guest" @endAuth>
 
 {{-- System wide messages when logged in --}}
-<x-commons.toast />
+<x-commons.toast/>
 {{-- System wide messages when logged in --}}
 
 @Auth
-    <x-layouts.partials.sidebar />
+    <x-layouts.partials.sidebar/>
 @endAuth
 <main>
     @Auth
-        <x-layouts.partials.submenu :items="$subMenu ?? null" />
+        <x-layouts.partials.submenu :items="$subMenu ?? null"/>
     @endAuth
     <section class="content" x-cloak>
-        <x-layouts.partials.header :pageH1="$pageTitle ?? config('carevise.short-name')" />
+        <x-layouts.partials.header :pageH1="$pageTitle ?? config('carevise.short-name')"/>
         @Auth
-            <x-layouts.partials.breadcrumb />
+            {{-- <x-layouts.partials.breadcrumb /> --}}
         @endAuth
         <article>
             @if ($slot->isEmpty())
@@ -48,7 +48,7 @@
                 {!! $slot !!}
             @endif
         </article>
-        <x-layouts.partials.footer />
+        <x-layouts.partials.footer/>
     </section>
 </main>
 </body>
