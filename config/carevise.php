@@ -67,6 +67,7 @@ return [
 
     'pagination' => [
         'size' => 10,
+        'long' => 25,
     ],
 
     'formats' => [

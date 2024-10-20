@@ -2,6 +2,7 @@
 
 namespace App\Models\Commons;
 
+use Str;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -78,7 +79,8 @@ class Demographic extends Model
         if (!empty($this->last_name) && !empty($this->first_name)) {
             return new Attribute(
                 get: fn(
-                ) => $this->last_name.', '.$this->first_name.((!empty($this->middle_name)) ? ' '.$this->middle_name : null),
+                ) => $this->last_name.', '.$this->first_name.((!empty($this->middle_name)) ? ' '.Str::substr($this->middle_name,
+                            0, 1).'.' : null),
             );
         }
         return new Attribute(get: fn() => null);

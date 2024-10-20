@@ -132,7 +132,7 @@
     main aside.submenu .nav {
         @apply flex flex-col;
         @apply flex-1 w-full;
-        @apply mt-14;
+        @apply mt-14 pb-1.5;
         @apply items-start justify-start;
     }
 
@@ -256,7 +256,7 @@
 
     main .content article {
         @apply flex-1;
-        @apply px-6;
+        @apply px-6 pt-6;
     }
 
     main .content footer {
@@ -502,8 +502,8 @@
     }
 
     .table-pagination .details .count {
-        @apply text-[10px] text-accent leading-none dark:text-dark;
-        @apply ml-1.5 mt-0.5;
+        @apply text-[10px] text-accent leading-[21px] dark:text-dark;
+        @apply ml-1.5 mt-1;
     }
 
     .table-pagination .details .previous {
@@ -522,8 +522,8 @@
     .table-pagination .details .element {
         @apply relative inline-flex items-center justify-center;
         @apply p-0 -ml-px;
-        @apply w-6 h-6;
-        @apply text-[10px] font-medium text-accent/30 leading-none;
+        @apply w-8 h-6;
+        @apply text-[10px] font-medium text-accent/30 leading-[21px];
         @apply bg-accent/10;
         @apply border border-accent/50 fill-accent/30;
     }
@@ -537,8 +537,8 @@
     .table-pagination .details .element {
         @apply relative inline-flex items-center justify-center;
         @apply p-0 -ml-px;
-        @apply w-6 h-6;
-        @apply text-[10px] font-medium text-accent leading-none;
+        @apply w-8 h-6;
+        @apply text-[10px] font-medium text-accent leading-[21px];
         @apply bg-accent/10;
         @apply border border-accent/50 fill-accent;
         @apply cursor-pointer;
@@ -583,6 +583,80 @@
 
     #table.inactive tr td {
         @apply bg-dark/10 border-dark/10 text-dark/50;
+    }
+
+    .patient-block {
+        @apply w-full;
+        @apply text-xs text-accent;
+    }
+
+    .patient-block .details {
+        @apply mx-6 my-4;
+    }
+
+    .patient-block .details .name {
+        @apply w-full;
+        @apply py-3;
+        @apply text-sm text-center font-bold;
+        @apply bg-accent text-primary;
+    }
+
+    .patient-block .details .infoblock {
+        @apply flex flex-row;
+        @apply w-full p-2;
+        @apply bg-accent/40;
+    }
+
+    .patient-block .details .infoblock > div span {
+        @apply first-of-type:text-center;
+    }
+
+    .patient-block .details .infoblock box-icon {
+        @apply w-3.5 h-3.5;
+        @apply leading-5;
+        @apply fill-accent;
+    }
+
+    #table.ribbon {
+        @apply mb-6;
+        @apply border border-accent/40;
+    }
+
+    #table.ribbon tbody tr {
+        @apply table-row;
+        @apply border border-accent/40;
+        @apply bg-accent/40;
+        @apply hover:bg-accent/40 hover:cursor-auto;
+        @apply transition ease-in-out duration-100;
+    }
+
+    #table.ribbon tbody tr td {
+        @apply align-middle;
+        @apply text-xs leading-normal text-center text-accent;
+        @apply py-1 px-0;
+    }
+
+    #table.ribbon tbody tr td span {
+        @apply w-1/6;
+        @apply pr-0.5;
+        @apply float-left;
+        @apply text-right font-bold leading-5;
+    }
+
+    #table.ribbon tbody tr td span box-icon {
+        @apply w-4 h-4;
+        @apply leading-5 align-middle;
+        @apply fill-accent;
+    }
+
+    #table.ribbon tbody tr td span + span {
+        @apply w-5/6;
+        @apply pl-0.5;
+        @apply text-left font-normal;
+    }
+
+    #table.ribbon tbody tr td div {
+        @apply leading-5;
     }
 }
 
