@@ -132,7 +132,7 @@
     main aside.submenu .nav {
         @apply flex flex-col;
         @apply flex-1 w-full;
-        @apply mt-14 pb-1.5;
+        @apply mt-14 pb-1;
         @apply items-start justify-start;
     }
 
