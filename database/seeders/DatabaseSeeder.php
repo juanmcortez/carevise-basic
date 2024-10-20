@@ -39,6 +39,6 @@ class DatabaseSeeder extends Seeder
         Provider::factory(12)->create();
 
         // Create some random additional providers
-        Patient::factory(fake()->randomNumber(2, true))->create();
+        Patient::factory(fake()->randomNumber(3, true))->create();
     }
 }

@@ -34,6 +34,7 @@ class Patient extends Model
      * @var array<int, string>
      */
     protected $hidden = [
+        'demographic_id',
         'created_at',
         'updated_at',
         'deleted_at',
