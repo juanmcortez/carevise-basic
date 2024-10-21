@@ -6,7 +6,7 @@
     'focus' => false,
 ])
 <button
-    @class(['form-block group'])
+    @class(['form-block', 'group', $class])
     {{ $attributes->merge(['name' => $name, 'id' => $name]) }}
     @disabled($disabled)
     @required($required)
