@@ -5,8 +5,8 @@
         if($pid){
             $patient = \App\Models\Patients\Patient::query()->where('pid', $pid)->first();
     @endphp
-    <div class="patient-block">
-        <h6 class="menu">{{ __('Patient') }}</h6>
+    <div class="patient-block -mt-[53px]">
+        {{--<h6 class="menu">{{ __('Patient') }}</h6>--}}
         <div class="details">
             <div class="name">{{ $patient->demographic->complete_name }}</div>
             <div class="infoblock">
@@ -67,7 +67,7 @@
         </div>
 
 
-        <h6 class="menu">{{ __('Insurance Details') }}</h6>
+        {{--<h6 class="menu">{{ __('Insurance Details') }}</h6>--}}
         <div class="details">
             <div class="name">
                 {{ ($patient->insurances->primary->company->name) ?? '- Primary Insurance -' }}
